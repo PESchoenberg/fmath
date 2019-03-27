@@ -39,7 +39,7 @@ module fmath4
         ! Misc functions.
 
 
-        !> Draws a line on console.
+        !> Draws a simple line in the console.
         !>
         subroutine RspFLine()
 

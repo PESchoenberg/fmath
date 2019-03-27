@@ -112,7 +112,6 @@ module fmath2
             
             real( kind = fmath2_p1 ), intent(in) :: p_m, p_v
             
-            !RspFLinearMomentum1 = p_m * p_v * RspFLorentzFactor( RspFConst("c") )
             RspFLinearMomentum1 = p_m * p_v * RspFLorentzFactor( p_v )
             
             return
@@ -1699,6 +1698,7 @@ module fmath2
 
   
         !> Test for fmath2 subroutines and functions.
+        !>
         !> - RspFAngularMomentum1(...)
         !> - RspFAngularMomentum2(...)
         !> - RspFLinearMomentum1(...)
@@ -1821,6 +1821,7 @@ module fmath2
 
 
         !> Test for fmath2 subroutines and functions.
+        !>
         !> - RspFApproximateRocheLobeEggleton(...)
         !> - RspFHillSphere(...)
         !> - RspFArcsec2Km(...)
@@ -2071,6 +2072,7 @@ module fmath2
 
 
         !> Test for fmath2 subroutines and functions.
+        !>
         !> - RspFIsBlackHole(...)
         !> - RspFIsOverChandrasekharLimit(...)
         !> - RspFKg2Em(...)
@@ -2213,6 +2215,7 @@ module fmath2
 
 
         !> Test for fmath2 subroutines and functions.
+        !>
         !> - RspFMeanMotion(...)
         !> - RspFPs2Ly(...)
         !> - RspFRadius2SchwarzschildRatio(...)
@@ -2340,6 +2343,7 @@ module fmath2
 
 
         !> Test for fmath2 subroutines and functions.
+        !>
         !> - RspFSurfaceGravity1(...)
         !> - RspFSurfaceGravity2(...) 
         !>
