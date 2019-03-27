@@ -23,7 +23,7 @@
 !> 
 !> Test program for fmath* functions.
 !>
-!> Compilation nad linking:
+!> Compilation and linking:
 !> - gfortran -std='gnu' tfmath1.f95 fmath1.o fmath2.o fmath3.o fmath4.o fmath5.o -o tfmath1 -O3 -march=native -Wall -Wextra -fopenmp
 !>
 !> or (if you want to use MPICH with this)
@@ -35,7 +35,9 @@
 !>
 !> or (if you compiled it for use with MPICH)
 !>
-!> - mpiexec -np [n] ./tfmath1_mpi (n = number of processes to use, recommended n = 1 in this case).
+!> - mpiexec -np [n] ./tfmath1_mpi (n = number of processes to use, recommended
+!>  n = 1 in this case, because you might get errors otherwise, at least it the
+!>  present version of fmath).
 !> 
 program tfmath1
 

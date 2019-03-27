@@ -32,7 +32,6 @@ module fmath3
 
     ! Setting a platform-independent floating point precision.
     integer, parameter :: fmath3_p1 = selected_real_kind( 10,300 )
-    !integer, parameter :: fmath3_p2 = 10
     
     !------------------------------------------------------------------------------
     contains

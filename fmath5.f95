@@ -21,9 +21,6 @@
 !> 
 !> =============================================================================
 !> 
-!> Modified:
-!> - Jul 5 2018.
-!>
 !> Compilation:
 !> - ./cfmath.sh or 
 !> - mpif90 -std='gnu' -c fmath5.f95 -O3 -march=native -Wall -Wextra -fopenmp -fdec-math
