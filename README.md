@@ -52,6 +52,8 @@ a folder of your choice and cd into it.
 from other sources. These are indicated on each case, in the comments that
 correspond to each function.
 
+Please let me know if I forgot to add any credits or sources.
+
 
 ## License:
 

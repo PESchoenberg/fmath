@@ -957,7 +957,26 @@ module fmath4
 
             return
         end function 
+
+
+        !> Calculates exp(p_x1, p_x2) + p_x3.
+        !>
+        !> Arguments:
+        !> - p_x1: base.
+        !> - p_x2: exponent.
+        !> - p_x3: summand.
+        !>
+        pure real( kind = fmath4_p1 ) function RspFS1( p_x1, p_x2, p_x3 )
         
+            implicit none
+
+            real( kind = fmath4_p1 ), intent(in) :: p_x1, p_x2, p_x3
+
+            RspFS1 = p_x1**p_x2 + p_x3
+
+            return
+        end function         
+
         
         !==============================================================================
         ! Test.
@@ -1297,7 +1316,14 @@ module fmath4
                 write(*,*) "Res = ", RspFInvExp( a * x1, ((a * x1) - 1) )
                 write(*,*)                
             end do
-            
+
+            call RspFComment( "Testing RspFS...(...)" ) 
+            do x1 = 1,n
+                write(*,*) a * x1
+                write(*,*) "Res = ", RspFS1( a * x1, a * x1, a * x1 )
+                write(*,*)                
+            end do
+           
             call RspFCommentEn( "End RspFTestFmath45" )
             
         end subroutine        

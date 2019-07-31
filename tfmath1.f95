@@ -83,9 +83,9 @@ program tfmath1
             case (4)
                 call RspFTestFmath4All()       
             case (5)
-                call RspFTestFmath5All()       
+                call RspFTestFmath5All()
             case default
-                call RspFCommentEn( "You selected a wrong option number. Please, try again..." )
+               call RspFCommentEn( "You selected an option not implemented. Please, try again..." )
         end select    
     
     end do
