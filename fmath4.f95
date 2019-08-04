@@ -148,10 +148,10 @@ module fmath4
         end function 
  
 
-        !> Generates a Mersenne number M=2^p_pow - 1.
+        !> Generates a Mersenne number M = 2^p_pow - 1.
         !>  
         !> Arguments:
-        !> - p_pow: power; should be <=1023. 
+        !> - p_pow: power; should be <= 1023. 
         !>
         !> Output:
         !> - Mersenne number.
@@ -977,6 +977,52 @@ module fmath4
             return
         end function         
 
+
+        !> Performs p_x1**p_x2 [p_cond] p_x3**p_x4
+        !>
+        !> Arguments:
+        !> - p_cond: operation to be applied, as per the following list:
+        !>      - "+": summation.
+        !>      - "-": substraction.
+        !>      - "*": multiplication.
+        !>      - "/": division.       
+        !> - p_x1: first operand.
+        !> - p_x2: second operand.
+        !> - p_x3: third operand.
+        !> - p_x4: fourth operand.        
+        !>
+        !> Output:
+        !> - Res = p_x1**p_x2 [p_cond] p_x3**p_x4
+        !>
+        pure real( kind = fmath4_p1 ) function RspFS2( p_cond, p_x1, p_x2, p_x3, p_x4 )
+        
+            implicit none
+
+            real( kind = fmath4_p1 ), intent(in) :: p_x1, p_x2, p_x3, p_x4
+            real( kind = fmath4_p1 ) :: res, x12, x34
+            character(2), intent(in) :: p_cond
+
+            x12 = p_x1 ** p_x2
+            x34 = p_x3 ** p_x4
+            
+            if (p_cond  == "+") then
+               res = x12 + x34
+            else if (p_cond == "-") then
+               res = x12 - x34
+            else if (p_cond == "*") then
+               res = x12 * x34
+            else if (p_cond == "/") then
+               res = x12 / x34               
+            else
+               res = 0.0
+            end if
+                       
+            !Result            
+            RspFS2 = res 
+
+            return
+        end function        
+
         
         !==============================================================================
         ! Test.
@@ -1002,6 +1048,7 @@ module fmath4
             write(*,*)
             call RspFTestFmath45()
             write(*,*)
+            call RspFTestFmath46()
             
         end subroutine
 
@@ -1316,17 +1363,72 @@ module fmath4
                 write(*,*) "Res = ", RspFInvExp( a * x1, ((a * x1) - 1) )
                 write(*,*)                
             end do
+           
+            call RspFCommentEn( "End RspFTestFmath45" )
+            
+        end subroutine        
 
-            call RspFComment( "Testing RspFS...(...)" ) 
+
+        !> Test for fmath4 subroutines and functions.
+        !>
+        !> - RspFS1(...)  
+        !> - RspFS2(...)
+        !>
+        !> Output:
+        !> - Test results for fmath4.
+        !>       
+        subroutine RspFTestFmath46()
+            
+            implicit none
+
+            integer :: x1, n
+            real( kind = fmath4_p1 ) :: a
+            
+            a = 1.0
+            n = 10
+            
+            call RspFLine()
+            call RspFCommentEn( "Begin RspFTestFmath46" )
+
+            call RspFComment( "Testing RspFS1(...)" ) 
             do x1 = 1,n
                 write(*,*) a * x1
                 write(*,*) "Res = ", RspFS1( a * x1, a * x1, a * x1 )
                 write(*,*)                
             end do
-           
-            call RspFCommentEn( "End RspFTestFmath45" )
+
+            call RspFComment( "Testing RspFS2(\'+\'...)" ) 
+            do x1 = 1,n
+                write(*,*) a * x1
+                write(*,*) "Res = ", RspFS2( "+", a * x1, a * x1, a * x1, a * x1 )
+                write(*,*)                
+            end do
+
+            call RspFComment( "Testing RspFS2(\'-\'...)" ) 
+            do x1 = 1,n
+                write(*,*) a * x1
+                write(*,*) "Res = ", RspFS2( "-", a * x1, a * x1, a * x1, a * x1 )
+                write(*,*)                
+            end do
+
+            call RspFComment( "Testing RspFS2(\'*\'...)" ) 
+            do x1 = 1,n
+                write(*,*) a * x1
+                write(*,*) "Res = ", RspFS2( "*", a * x1, a * x1, a * x1, a * x1 )
+                write(*,*)                
+            end do
+
+            call RspFComment( "Testing RspFS2(\'/\'...)" ) 
+            do x1 = 1,n
+                write(*,*) a * x1
+                write(*,*) "Res = ", RspFS2( "/", a * x1, a * x1, a * x1, a * x1 )
+                write(*,*)                
+            end do
             
-        end subroutine        
+            call RspFCommentEn( "End RspFTestFmath46" )
+            
+        end subroutine
+
         
 end module
 
