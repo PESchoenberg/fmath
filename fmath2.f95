@@ -1666,7 +1666,94 @@ module fmath2
             return
         end function
 
-       
+
+        !> RspFYorkTime - York time as defined by Alcubierre (1994).
+        !>
+        !> Arguments:
+        !> - p_xs: xs.
+        !> - p_vs: vs.
+        !> - p_rs: rs.
+        !> - p_df: df.
+        !> - p_drs: drs.
+        !>                   
+        !> Sources:
+        !> - 1: "The Alcubierre Warp Drive in Higher Dimensional Spacetime",
+        !>   H. G. White 1 and E. W. Davis, Inst. for Advanced Studies at
+        !>   Austin.
+        !>   - 1.1: p 2.
+        !>
+        !> Note:
+        !> -  NEEDS TESTING.
+        !>        
+        real( kind = fmath2_p1 ) function RspFYorkTime( p_xs, p_vs, p_rs, p_df, p_drs )
+        
+            implicit none
+
+            real( kind = fmath2_p1 ) :: p_vs, p_xs, p_rs, p_df, p_drs            
+
+            !> [1.1] 
+            RspFYorkTime = (p_vs / RspFConst("c")) * (p_xs / p_rs) * (p_df / p_drs)
+            
+            return
+        end function
+        
+
+        !> RspFMetricAlcubierre1994 - Alcubierre metric, 1994.
+        !>
+        !> Sources:
+        !> - 1: "The Alcubierre Warp Drive in Higher Dimensional Spacetime",
+        !>   H. G. White 1 and E. W. Davis, Inst. for Advanced Studies at
+        !>   Austin.
+        !>   - 1.1: p 2.
+        !>
+        !> Output:
+        !> - ds**2 (see sources and metric specification).
+        !>
+        !> Note:
+        !> -  NEEDS TESTING.
+        !>
+        real( kind = fmath2_p1 ) function RspFMetricAlcubierre1994( p_dt, p_dx, p_dy, p_dz, p_vst, p_frs )
+        
+            implicit none
+
+            real( kind = fmath2_p1 ) :: p_dt, p_dx, p_dy, p_dz, p_vst, p_frs
+
+            !> Alcubierre metric [1.1]
+            RspFMetricAlcubierre1994 = (((-1) * RspFConst("c")**2) * p_dt**2) + (p_dx - (p_vst * p_frs * p_dt ))**2 + &
+                 p_dy**2 + p_dz**2
+            
+            return
+        end function
+
+        
+        !> RspFSpacetimeExpansionBoostWhite2003 - Field equation for spacetione expansion Boost, according to White (2003).
+        !>
+        !> Arguments:
+        !> - p_vs: vs.
+        !> - p_frs: frs.
+        !>
+        !> Sources:
+        !> - 1: "The Alcubierre Warp Drive in Higher Dimensional Spacetime",
+        !>   H. G. White 1 and E. W. Davis, Inst. for Advanced Studies at
+        !>   Austin.
+        !>   - 1.2: p 3.
+        !>
+        !> Note:
+        !> -  NEEDS TESTING.
+        !>        
+        real( kind = fmath2_p1 ) function RspFSpacetimeExpansionBoostWhite2003 ( p_vs, p_frs )
+        
+            implicit none
+
+            real( kind = fmath2_p1 ) :: p_vs, p_frs
+            
+            !> See [1.2]
+            RspFSpacetimeExpansionBoostWhite2003 = cosh( 0.5 * ( log( abs( 1 - ( ( p_vs / RspFConst("c") )**2 * p_frs**2 )))))
+            
+            return
+        end function
+        
+        
         !==============================================================================
         ! Test.
   
@@ -1692,6 +1779,8 @@ module fmath2
             call RspFTestFmath25()
             write(*,*)
             call RspFTestFmath26()
+            write(*,*)
+            call RspFTestFmath27()
             write(*,*)
             
         end subroutine
@@ -2381,6 +2470,45 @@ module fmath2
             
         end subroutine
 
-        
+
+        !> Test for fmath2 subroutines and functions.
+        !>
+        !> - RspFYorkTime(...)
+        !> - RspFMetricAlcubierre1994(...) 
+        !>
+        !> Output:
+        !> - Test results for fmath2.
+        !>       
+        subroutine RspFTestFmath27()
+            
+            implicit none
+
+            real( kind = fmath4_p1 ) :: n, a
+            integer :: x1
+            
+            n = 100
+            a = 1.0
+            
+            call RspFLine()
+            call RspFCommentEn( "Begin RspFTestFmath27" )
+
+            call RspFComment( "Testing RspFYorkTime(...)" ) 
+            do x1 = 1,10
+                write(*,*) a * x1, a * x1
+                write(*,*) RspFYorkTime( a * x1, a * x1, a * x1, a * x1, a * x1 )
+                write(*,*)      
+            end do
+           
+            call RspFComment( "Testing RspFMetricAlcubierre1994(...)" ) 
+            do x1 = 1,10
+                write(*,*) a * x1, a * x1
+                write(*,*) RspFMetricAlcubierre1994( a * x1, a * x1 * 2, a * 0, a * 0, a * x1 * 5, a * x1 * 6 )
+                write(*,*)      
+            end do
+            
+            call RspFCommentEn( "End RspFTestFmath27" )
+            
+        end subroutine
+ 
 end module
 
