@@ -1000,7 +1000,7 @@ module fmath4
 
             real( kind = fmath4_p1 ), intent(in) :: p_x1, p_x2, p_x3, p_x4
             real( kind = fmath4_p1 ) :: res, x12, x34
-            character(2), intent(in) :: p_cond
+            character(1), intent(in) :: p_cond
 
             x12 = p_x1 ** p_x2
             x34 = p_x3 ** p_x4
