@@ -8,7 +8,7 @@
 A collection under development of Fortran modules and functions written over
 time that might be useful for calculations in maths, astronomy, aeronautics,
 etc. Some of these functions are still unfinished or need further testing; all
-of them originated as "scrapbook material" from various Matlab and Frotran
+of them originated as "scrapbook material" from various Matlab and Fortran
 projects that I kept jsut because they could be useful in the future.
 
 
